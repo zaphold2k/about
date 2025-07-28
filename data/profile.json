@@ -1,0 +1,102 @@
+{
+  "personal": {
+    "name": "Martin Casanovas",
+    "role": "DevOps Engineer & Tech Enthusiast",
+    "company": "Primary S.A.",
+    "location": "Mar del Plata, Argentina 🌊",
+    "email": "contacto@zaphold.ar",
+    "github": "zaphold2k",
+    "linkedin": "martin-casanovas-14810273",
+    "website": "zaphold.ar"
+  },
+  "contact": {
+    "email": "contacto@zaphold.ar",
+    "github": "https://github.com/zaphold2k",
+    "linkedin": "https://linkedin.com/in/martin-casanovas-14810273",
+    "available": true
+  },
+  "skills": {
+    "primary": ["DevOps", "CI/CD", "Kubernetes", "Docker", "AWS", "Python", "Automatización"],
+    "devops_cloud": {
+      "Kubernetes & Containers": 95,
+      "DevSecOps": 70,
+      "CI/CD (GitLab)": 75,
+      "AWS & Google Cloud": 80
+    },
+    "automation_dev": {
+      "Ansible": 85,
+      "Python": 60,
+      "Monitoreo & Logs": 80,
+      "Hardware & IoT": 100
+    }
+  },
+  "bio": {
+    "intro": "Actualmente como **DevOps Engineer** en **Primary S.A.**, enfocado en **automatización**, **CI/CD** y **monitoreo** de infraestructuras críticas. Me enfoco en mantener pipelines y sistemas resilientes, con experiencia en **Kubernetes** on premise y orquestación de contenedores a gran escala y baja latencia.",
+    "passion": "Además de mi trabajo en DevOps, soy un entusiasta de la **tecnología**, especialmente **hardware**, **IoT** e **impresión 3D**. Disfruto experimentando con nuevas tecnologías y creando soluciones innovadoras que combinen software y hardware."
+  },
+  "achievements": [
+    {
+      "title": "🚀 DevOps Engineer",
+      "subtitle": "CI/CD & Automation",
+      "description": "Especialista en automatización de despliegues con Ansible, pipelines CI/CD con gitlabCI y orquestación de contenedores.",
+      "color": "accent"
+    },
+    {
+      "title": "☸️ Kubernetes Expert",
+      "subtitle": "Bare-metal & Cloud",
+      "description": "Experiencia en Kubernetes, administración de clusters Cloud y Bare-Metal y orquestación automatizada.",
+      "color": "accent"
+    },
+    {
+      "title": "☁️ Cloud Architecture",
+      "subtitle": "AWS & Google Cloud",
+      "description": "Diseño e implementación de arquitecturas cloud escalables y resilientes.",
+      "color": "accent"
+    },
+    {
+      "title": "🛡️ SRE",
+      "subtitle": "Monitoreo Ágil & Soporte E2E",
+      "description": "SRE enfocado en monitoreo ágil de infraestructura crítica y soporte de nivel 1 end-to-end en networking, storage y compute para identificar fallas de forma proactiva.",
+      "color": "primary"
+    },
+    {
+      "title": "🔧 Hardware Enthusiast",
+      "subtitle": "IoT & 3D Printing",
+      "description": "Pasión por tecnologías emergentes, proyectos IoT e impresión 3D.",
+      "color": "secondary"
+    }
+  ],
+  "interests": [
+    "DevOps & CI/CD",
+    "Kubernetes",
+    "Automatización",
+    "Hardware & IoT",
+    "Impresión 3D",
+    "Tecnología"
+  ],
+  "navigation": [
+    { "href": "#inicio", "label": "./home" },
+    { "href": "#sobre-mi", "label": "./about" },
+    { "href": "#proyectos", "label": "./projects" },
+    { "href": "#contacto", "label": "./contact" }
+  ],
+  "stats": [
+    { "value": "DevOps", "label": "Especialidad" },
+    { "value": "Kubernetes", "label": "Orquestación" },
+    { "value": "CI/CD", "label": "Automation" },
+    { "value": "Python & Bash", "label": "Stack" }
+  ],
+  "meta": {
+    "title": "Martin Casanovas - DevOps Engineer",
+    "description": "DevOps Engineer especializado en Kubernetes, CI/CD y automatización. Mar del Plata, Argentina.",
+    "keywords": ["DevOps", "Kubernetes", "CI/CD", "Docker", "AWS", "Python", "Automatización", "DevSecOps"],
+    "author": "Martin Casanovas",
+    "copyright": "© 2025 Martin Casanovas."
+  },
+  "config": {
+    "github_username": "zaphold2k",
+    "projects_count": 6,
+    "cache_duration": 900000,
+    "rate_limit_interval": 30000
+  }
+}
