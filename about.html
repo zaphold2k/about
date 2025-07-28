@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Martin Casanovas - DevOps Engineer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+    <script src="../js/profile.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#00ff88',
+                        secondary: '#0a84ff',
+                        accent: '#ff6b6b',
+                        'code-bg': '#0d1117',
+                        'code-border': '#21262d',
+                    },
+                    fontFamily: {
+                        'mono': ['JetBrains Mono', 'monospace'],
+                        'sans': ['Inter', 'sans-serif'],
+                    },
+                    animation: {
+                        'cursor': 'cursor 1s infinite',
+                        'fade-in': 'fadeIn 0.5s ease-in',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @keyframes cursor {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .code-block {
+            background: #0d1117;
+            border: 1px solid #21262d;
+        }
+        .syntax-comment { color: #8b949e; }
+        .syntax-string { color: #a5d6ff; }
+        .syntax-keyword { color: #ff7b72; }
+        .syntax-function { color: #d2a8ff; }
+        .syntax-variable { color: #79c0ff; }
+        .syntax-number { color: #79c0ff; }
+    </style>
+</head>
+<body class="bg-black text-gray-100 font-mono leading-relaxed">
+    <!-- Header/Navigation -->
+    <nav class="fixed top-0 w-full bg-black/80 backdrop-blur-sm z-50 border-b border-gray-800">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between" id="navigation-content">
+                <!-- Navigation will be loaded dynamically -->
+                <div class="text-lg font-mono">
+                    <span class="text-primary">~/</span>
+                    <span class="text-gray-300">cargando...</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="min-h-screen flex items-center justify-center px-6 pt-20">
+        <div class="max-w-4xl w-full">
+            <div class="code-block rounded-lg p-8 mb-8">
+                <div class="flex items-center mb-4">
+                    <div class="flex space-x-2">
+                        <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+                        <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                        <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                    </div>
+                    <span class="ml-4 text-gray-400 text-sm">martin@devops:~$ ./portfolio.sh</span>
+                </div>
+                <div class="font-mono text-sm leading-loose" id="hero-content">
+                    <!-- Content will be loaded dynamically -->
+                    <div class="text-center py-8">
+                        <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
+                        <p class="text-gray-400 font-mono text-sm">Cargando información del perfil...</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Enlaces rápidos -->
+            <div class="flex flex-wrap gap-4 justify-center" id="quick-links">
+                <!-- Links will be loaded dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Sobre Mí -->
+    <section id="sobre-mi" class="py-20 px-6">
+        <div class="container mx-auto max-w-4xl">
+            <div class="code-block rounded-lg p-8">
+                <div class="flex items-center mb-6">
+                    <div class="flex space-x-2">
+                        <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+                        <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                        <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                    </div>
+                    <span class="ml-4 text-gray-400 text-sm">about.md</span>
+                </div>
+                
+                <div class="font-mono text-sm">
+                    <h2 class="text-2xl font-bold mb-6 text-primary"># Sobre Mí</h2>
+                    
+                    <div class="prose prose-invert max-w-none" id="bio-content">
+                        <!-- Bio will be loaded dynamically -->
+                    </div>
+
+                    <div class="mb-6" id="skills-section">
+                        <!-- Skills will be loaded dynamically -->
+                    </div>
+
+                    <div class="border-t border-gray-700 pt-6">
+                        <div class="text-gray-400 text-xs">
+                            <span class="syntax-comment">// Siempre aprendiendo, siempre creciendo 🌱</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Proyectos -->
+    <section id="proyectos" class="py-20 px-6">
+        <div class="container mx-auto max-w-6xl">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4 text-primary font-mono"># Proyectos Destacados</h2>
+                <p class="text-gray-400 font-mono text-sm">// Obtenidos dinámicamente desde GitHub API</p>
+            </div>
+            
+            <!-- Loading state -->
+            <div id="projects-loading" class="text-center py-12">
+                <div class="code-block rounded-lg p-8 mx-auto max-w-md">
+                    <div class="flex items-center justify-center mb-4">
+                        <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+                    </div>
+                    <p class="text-gray-400 font-mono text-sm">Cargando repositorios...</p>
+                    <p class="text-gray-500 font-mono text-xs mt-2">// Desde GitHub API</p>
+                </div>
+            </div>
+
+            <!-- Error state -->
+            <div id="projects-error" class="text-center py-12 hidden">
+                <div class="code-block rounded-lg p-8 mx-auto max-w-md">
+                    <div class="text-accent mb-4">⚠️</div>
+                    <p class="text-gray-400 font-mono text-sm">Error al cargar repositorios</p>
+                    <button onclick="loadGitHubRepos()" class="mt-4 px-4 py-2 bg-primary text-black rounded font-mono text-sm hover:bg-primary/80 transition-colors">
+                        Reintentar
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Projects container -->
+            <div id="projects-container" class="grid lg:grid-cols-2 gap-8 hidden">
+                <!-- Los proyectos se cargarán dinámicamente aquí -->
+            </div>
+            
+            <div class="text-center mt-12" id="projects-link">
+                <!-- GitHub link will be loaded dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Logros -->
+    <section class="py-20 px-6">
+        <div class="container mx-auto max-w-4xl">
+            <div class="code-block rounded-lg p-8">
+                <div class="flex items-center mb-6">
+                    <div class="flex space-x-2">
+                        <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+                        <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                        <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                    </div>
+                    <span class="ml-4 text-gray-400 text-sm">achievements.json</span>
+                </div>
+                
+                <div class="font-mono text-sm">
+                    <h2 class="text-2xl font-bold mb-6 text-primary"># Logros & Certificaciones</h2>
+                    
+                    <div class="space-y-6" id="achievements-content">
+                        <!-- Achievements will be loaded dynamically -->
+                    </div>
+                    
+                    <div class="mt-8 pt-6 border-t border-gray-700">
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center" id="stats-content">
+                            <!-- Stats will be loaded dynamically -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacto -->
+    <section id="contacto" class="py-20 px-6">
+        <div class="container mx-auto max-w-4xl">
+            <div class="code-block rounded-lg p-8">
+                <div class="flex items-center mb-6">
+                    <div class="flex space-x-2">
+                        <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+                        <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                        <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                    </div>
+                    <span class="ml-4 text-gray-400 text-sm">group_vars/devops_engineers.yml</span>
+                </div>
+                
+                <div class="font-mono text-sm">
+                    <h2 class="text-2xl font-bold mb-6 text-primary"># Contacto</h2>
+                    
+                    <div class="mb-8" id="contact-info">
+                        <!-- Contact info will be loaded dynamically -->
+                    </div>
+                    
+                    <div class="border-t border-gray-700 pt-6">
+                        <h3 class="text-lg font-bold mb-4 text-secondary">## Envía un mensaje</h3>
+                        <form class="space-y-4" onsubmit="sendEmail(event);">
+                            <!-- Campo honeypot (oculto para humanos, visible para bots) -->
+                            <input 
+                                type="text" 
+                                id="contact-honeypot"
+                                name="website"
+                                placeholder="Deja este campo vacío"
+                                style="position: absolute; left: -9999px; top: -9999px; opacity: 0; pointer-events: none;"
+                                tabindex="-1"
+                                autocomplete="off"
+                            >
+                            
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <input 
+                                    type="text" 
+                                    id="contact-name"
+                                    placeholder="Nombre" 
+                                    class="w-full p-3 bg-black border border-gray-700 rounded text-sm font-mono focus:border-primary focus:outline-none transition-colors"
+                                    minlength="2"
+                                    maxlength="50"
+                                    required
+                                >
+                                <input 
+                                    type="email" 
+                                    id="contact-email"
+                                    placeholder="Email" 
+                                    class="w-full p-3 bg-black border border-gray-700 rounded text-sm font-mono focus:border-primary focus:outline-none transition-colors"
+                                    maxlength="100"
+                                    required
+                                >
+                            </div>
+                            <input 
+                                type="text" 
+                                id="contact-subject"
+                                placeholder="Asunto" 
+                                class="w-full p-3 bg-black border border-gray-700 rounded text-sm font-mono focus:border-primary focus:outline-none transition-colors"
+                                minlength="5"
+                                maxlength="100"
+                                required
+                            >
+                            <textarea 
+                                id="contact-message"
+                                placeholder="Mensaje... (mínimo 10 caracteres)" 
+                                rows="6" 
+                                class="w-full p-3 bg-black border border-gray-700 rounded text-sm font-mono focus:border-primary focus:outline-none resize-none transition-colors"
+                                minlength="10"
+                                maxlength="1000"
+                                required
+                            ></textarea>
+                            <div class="text-right">
+                                <span id="char-counter" class="text-xs text-gray-500 font-mono">0/1000 caracteres</span>
+                            </div>
+                            <button 
+                                type="submit" 
+                                class="w-full md:w-auto px-6 py-3 bg-primary text-black font-mono text-sm rounded hover:bg-primary/80 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                            >
+                                Enviar mensaje →
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 px-6 border-t border-gray-800">
+        <div class="container mx-auto max-w-4xl">
+            <div class="text-center font-mono text-sm" id="footer-content">
+                <!-- Footer will be loaded dynamically -->
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Inicializar página cuando los datos estén cargados
+        document.addEventListener('profileLoaded', function(event) {
+            const profileData = event.detail;
+            
+            // Generar contenido dinámico
+            generateDynamicContent();
+            
+            // Inicializar componentes después de cargar contenido
+            initializeComponents();
+        });
+
+        // Función para generar todo el contenido dinámico
+        function generateDynamicContent() {
+            // Navigation
+            const navContent = document.getElementById('navigation-content');
+            navContent.innerHTML = window.htmlGenerator.generateNavigation();
+            
+            // Hero content
+            const heroContent = document.getElementById('hero-content');
+            heroContent.innerHTML = window.htmlGenerator.generateAboutHeader();
+            
+            // Quick links
+            const quickLinks = document.getElementById('quick-links');
+            quickLinks.innerHTML = window.htmlGenerator.generateQuickLinks();
+            
+            // Bio content
+            const bioContent = document.getElementById('bio-content');
+            const bio = window.profileManager.getBio();
+            bioContent.innerHTML = `
+                <p class="text-gray-300 mb-6 leading-relaxed">
+                    ${bio.intro}
+                </p>
+                <p class="text-gray-300 mb-8 leading-relaxed">
+                    ${bio.passion}
+                </p>
+            `;
+            
+            // Skills section
+            const skillsSection = document.getElementById('skills-section');
+            const skills = window.profileManager.getSkills();
+            skillsSection.innerHTML = `
+                <h3 class="text-lg font-bold mb-4 text-primary">## Stack Técnico</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <h4 class="text-base font-semibold mb-3 text-secondary">DevOps & Cloud</h4>
+                        <div class="space-y-1 text-sm">
+                            ${window.htmlGenerator.generateSkillBars(skills.devops_cloud)}
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="text-base font-semibold mb-3 text-secondary">Automatización & Dev</h4>
+                        <div class="space-y-1 text-sm">
+                            ${window.htmlGenerator.generateSkillBars(skills.automation_dev)}
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // Achievements
+            const achievementsContent = document.getElementById('achievements-content');
+            achievementsContent.innerHTML = window.htmlGenerator.generateAchievements();
+            
+            // Stats
+            const statsContent = document.getElementById('stats-content');
+            statsContent.innerHTML = window.htmlGenerator.generateStats();
+            
+            // Contact info
+            const contactInfo = document.getElementById('contact-info');
+            contactInfo.innerHTML = window.htmlGenerator.generateContactInfo();
+            
+            // Projects link
+            const projectsLink = document.getElementById('projects-link');
+            const contact = window.profileManager.getContact();
+            projectsLink.innerHTML = `
+                <a href="${contact.github}" target="_blank"
+                   class="inline-block px-6 py-3 bg-primary/10 border border-primary text-primary rounded font-mono text-sm hover:bg-primary hover:text-black transition-all">
+                    Ver todos los proyectos en GitHub →
+                </a>
+            `;
+            
+            // Footer
+            const footerContent = document.getElementById('footer-content');
+            footerContent.innerHTML = window.htmlGenerator.generateFooter();
+        }
+
+        // Función para inicializar componentes (como en el about.html original)
+        function initializeComponents() {
+            // Smooth scrolling para enlaces del menú
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+
+            // Efecto typing para el cursor
+            let cursorVisible = true;
+            setInterval(() => {
+                const cursor = document.querySelector('.animate-cursor');
+                if (cursor) {
+                    cursor.style.opacity = cursorVisible ? '0' : '1';
+                    cursorVisible = !cursorVisible;
+                }
+            }, 500);
+
+            // Animación del navbar al hacer scroll
+            let lastScrollTop = 0;
+            window.addEventListener('scroll', () => {
+                const navbar = document.querySelector('nav');
+                const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+                
+                if (currentScroll > 100) {
+                    navbar.style.background = 'rgba(0, 0, 0, 0.95)';
+                    navbar.style.backdropFilter = 'blur(10px)';
+                } else {
+                    navbar.style.background = 'rgba(0, 0, 0, 0.8)';
+                    navbar.style.backdropFilter = 'blur(4px)';
+                }
+                
+                lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+            });
+
+            // Animaciones de entrada para las secciones
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            // Observar elementos para animaciones
+            const animatedElements = document.querySelectorAll('.code-block');
+            animatedElements.forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(el);
+            });
+
+            // Efecto hover para los links de proyectos
+            document.querySelectorAll('a[href*="github.com"]').forEach(link => {
+                link.addEventListener('mouseenter', function() {
+                    this.style.transform = 'scale(1.05)';
+                });
+                
+                link.addEventListener('mouseleave', function() {
+                    this.style.transform = 'scale(1)';
+                });
+            });
+
+            // Console message
+            console.log(`
+╔══════════════════════════════════════╗
+║      🚀 Martin Casanovas Portfolio   ║
+║                                      ║
+║  DevOps Engineer & Tech Enthusiast  ║
+║  Mar del Plata, Argentina 🌊         ║
+║  GitHub: github.com/zaphold2k        ║
+║  Stack: K8s, Docker, CI/CD, AWS      ║
+╚══════════════════════════════════════╝
+            `);
+
+            // Cargar proyectos de GitHub
+            loadGitHubRepos();
+            
+            // Configurar contador de caracteres para el mensaje
+            const messageTextarea = document.getElementById('contact-message');
+            const charCounter = document.getElementById('char-counter');
+            
+            if (messageTextarea && charCounter) {
+                messageTextarea.addEventListener('input', function() {
+                    const currentLength = this.value.length;
+                    const maxLength = 1000;
+                    
+                    charCounter.textContent = `${currentLength}/${maxLength} caracteres`;
+                    
+                    // Cambiar color según la longitud
+                    if (currentLength > maxLength * 0.9) {
+                        charCounter.className = 'text-xs text-accent font-mono'; // Rojo cuando se acerca al límite
+                    } else if (currentLength > maxLength * 0.7) {
+                        charCounter.className = 'text-xs text-secondary font-mono'; // Azul cuando está llegando
+                    } else {
+                        charCounter.className = 'text-xs text-gray-500 font-mono'; // Gris normal
+                    }
+                });
+            }
+        }
+
+        // Manejo de errores de carga
+        document.addEventListener('profileError', function(event) {
+            console.error('Error loading profile:', event.detail);
+            
+            // Mostrar mensaje de error en las secciones principales
+            const sections = ['hero-content', 'bio-content', 'skills-section'];
+            sections.forEach(sectionId => {
+                const section = document.getElementById(sectionId);
+                if (section) {
+                    section.innerHTML = `
+                        <div class="text-center py-8">
+                            <div class="text-accent mb-4">⚠️</div>
+                            <p class="text-gray-400 font-mono text-sm">Error al cargar información del perfil</p>
+                            <button onclick="window.location.reload()" class="mt-4 px-4 py-2 bg-primary text-black rounded font-mono text-sm hover:bg-primary/80 transition-colors">
+                                Reintentar
+                            </button>
+                        </div>
+                    `;
+                }
+            });
+        });
+
+        // GitHub API Integration
+        const config = window.profileManager ? window.profileManager.getConfig() : {};
+        const GITHUB_USERNAME = config.github_username || 'zaphold2k';
+        const GITHUB_API_URL = `https://api.github.com/users/${GITHUB_USERNAME}/repos`;
+        
+        // Configuración de caché
+        const CACHE_KEY = 'github_repos_cache';
+        const CACHE_DURATION = config.cache_duration || 15 * 60 * 1000;
+        const RATE_LIMIT_KEY = 'github_api_last_request';
+        const MIN_REQUEST_INTERVAL = config.rate_limit_interval || 30 * 1000;
+
+        // [Incluir todas las funciones de GitHub API del archivo original...]
+        // GitHub API Integration functions (keeping all original functionality)
+        function isCacheValid() {
+            const cached = localStorage.getItem(CACHE_KEY);
+            if (!cached) return false;
+            
+            try {
+                const { timestamp } = JSON.parse(cached);
+                return (Date.now() - timestamp) < CACHE_DURATION;
+            } catch (e) {
+                return false;
+            }
+        }
+
+        function getCachedData() {
+            try {
+                const cached = localStorage.getItem(CACHE_KEY);
+                if (cached) {
+                    const { data } = JSON.parse(cached);
+                    return data;
+                }
+            } catch (e) {
+                console.warn('Error al leer caché:', e);
+            }
+            return null;
+        }
+
+        function setCacheData(data) {
+            try {
+                const cacheObject = {
+                    data: data,
+                    timestamp: Date.now()
+                };
+                localStorage.setItem(CACHE_KEY, JSON.stringify(cacheObject));
+            } catch (e) {
+                console.warn('Error al guardar caché:', e);
+            }
+        }
+
+        function canMakeRequest() {
+            const lastRequest = localStorage.getItem(RATE_LIMIT_KEY);
+            if (!lastRequest) return true;
+            
+            return (Date.now() - parseInt(lastRequest)) > MIN_REQUEST_INTERVAL;
+        }
+
+        function markRequestMade() {
+            localStorage.setItem(RATE_LIMIT_KEY, Date.now().toString());
+        }
+
+        function getLanguageInfo(language) {
+            const languages = {
+                'JavaScript': { color: '#f1e05a', display: 'JavaScript' },
+                'TypeScript': { color: '#2b7489', display: 'TypeScript' },
+                'Python': { color: '#3572A5', display: 'Python' },
+                'Java': { color: '#b07219', display: 'Java' },
+                'C++': { color: '#f34b7d', display: 'C++' },
+                'C': { color: '#555555', display: 'C' },
+                'HTML': { color: '#e34c26', display: 'HTML' },
+                'CSS': { color: '#1572B6', display: 'CSS' },
+                'Shell': { color: '#89e051', display: 'Shell' },
+                'Go': { color: '#00ADD8', display: 'Go' },
+                'Rust': { color: '#dea584', display: 'Rust' },
+                'Swift': { color: '#ffac45', display: 'Swift' },
+                'Kotlin': { color: '#F18E33', display: 'Kotlin' },
+                'Vue': { color: '#4FC08D', display: 'Vue' },
+                'React': { color: '#61DAFB', display: 'React' }
+            };
+            
+            return languages[language] || { color: '#8b949e', display: language || 'Code' };
+        }
+
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            const now = new Date();
+            const diffTime = Math.abs(now - date);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            
+            if (diffDays === 1) return 'hace 1 día';
+            if (diffDays < 30) return `hace ${diffDays} días`;
+            if (diffDays < 365) return `hace ${Math.floor(diffDays / 30)} meses`;
+            return `hace ${Math.floor(diffDays / 365)} años`;
+        }
+
+        function createProjectHTML(repo) {
+            const langInfo = getLanguageInfo(repo.language);
+            const description = repo.description || 'Sin descripción disponible';
+            const isForked = repo.fork;
+            
+            return `
+                <div class="code-block rounded-lg p-6 hover:border-primary/50 transition-all duration-300 project-card">
+                    <div class="flex items-center mb-4">
+                        <div class="flex space-x-2">
+                            <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+                            <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                            <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                        </div>
+                        <span class="ml-4 text-gray-400 text-sm">${GITHUB_USERNAME}/${repo.name}</span>
+                        ${isForked ? '<span class="ml-2 text-secondary text-xs">forked</span>' : ''}
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h3 class="text-xl font-bold mb-2 text-primary font-mono">${repo.name}</h3>
+                        <p class="text-gray-300 text-sm leading-relaxed">
+                            ${description}
+                        </p>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2 py-1 bg-primary/20 text-primary text-xs rounded font-mono flex items-center">
+                                <span class="w-2 h-2 rounded-full mr-1" style="background-color: ${langInfo.color}"></span>
+                                ${langInfo.display}
+                            </span>
+                            ${repo.stargazers_count > 0 ? `<span class="px-2 py-1 bg-secondary/20 text-secondary text-xs rounded font-mono">⭐ ${repo.stargazers_count}</span>` : ''}
+                            ${repo.forks_count > 0 ? `<span class="px-2 py-1 bg-accent/20 text-accent text-xs rounded font-mono">🍴 ${repo.forks_count}</span>` : ''}
+                            <span class="px-2 py-1 bg-gray-700/20 text-gray-400 text-xs rounded font-mono">${formatDate(repo.updated_at)}</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flex space-x-4 text-sm">
+                        <a href="${repo.html_url}" target="_blank" 
+                           class="text-gray-400 hover:text-primary transition-colors font-mono">
+                            [código] →
+                        </a>
+                        <span class="text-gray-500 font-mono">[${repo.private ? 'privado' : 'público'}]</span>
+                        ${repo.homepage ? `<a href="${repo.homepage}" target="_blank" class="text-gray-400 hover:text-secondary transition-colors font-mono">[demo] →</a>` : ''}
+                    </div>
+                </div>
+            `;
+        }
+
+        async function loadGitHubRepos() {
+            const loadingEl = document.getElementById('projects-loading');
+            const errorEl = document.getElementById('projects-error');
+            const containerEl = document.getElementById('projects-container');
+            
+            if (isCacheValid()) {
+                console.log('📦 Cargando repositorios desde caché...');
+                const cachedRepos = getCachedData();
+                if (cachedRepos && cachedRepos.length > 0) {
+                    displayRepos(cachedRepos, loadingEl, errorEl, containerEl);
+                    return;
+                }
+            }
+
+            if (!canMakeRequest()) {
+                console.log('⏱️ Rate limit activo, usando datos de caché...');
+                const cachedRepos = getCachedData();
+                if (cachedRepos && cachedRepos.length > 0) {
+                    displayRepos(cachedRepos, loadingEl, errorEl, containerEl);
+                    return;
+                } else {
+                    showRateLimitMessage(loadingEl, errorEl, containerEl);
+                    return;
+                }
+            }
+            
+            console.log('🌐 Obteniendo repositorios desde GitHub API...');
+            
+            loadingEl.classList.remove('hidden');
+            errorEl.classList.add('hidden');
+            containerEl.classList.add('hidden');
+            
+            try {
+                const response = await fetch(GITHUB_API_URL + '?sort=updated&per_page=100');
+                
+                if (!response.ok) {
+                    if (response.status === 403) {
+                        throw new Error('RATE_LIMIT');
+                    }
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const repos = await response.json();
+                markRequestMade();
+                
+                const filteredRepos = repos
+                    .filter(repo => !repo.private)
+                    .sort((a, b) => {
+                        if (a.fork !== b.fork) return a.fork ? 1 : -1;
+                        if (a.stargazers_count !== b.stargazers_count) return b.stargazers_count - a.stargazers_count;
+                        return new Date(b.updated_at) - new Date(a.updated_at);
+                    })
+                    .slice(0, 6);
+                
+                setCacheData(filteredRepos);
+                displayRepos(filteredRepos, loadingEl, errorEl, containerEl);
+                
+            } catch (error) {
+                console.error('Error loading GitHub repos:', error);
+                
+                if (error.message === 'RATE_LIMIT') {
+                    showRateLimitMessage(loadingEl, errorEl, containerEl);
+                } else {
+                    const cachedRepos = getCachedData();
+                    if (cachedRepos && cachedRepos.length > 0) {
+                        console.log('📦 Mostrando datos de caché debido a error de red...');
+                        displayRepos(cachedRepos, loadingEl, errorEl, containerEl);
+                    } else {
+                        showErrorMessage(loadingEl, errorEl, containerEl);
+                    }
+                }
+            }
+        }
+
+        function displayRepos(filteredRepos, loadingEl, errorEl, containerEl) {
+            const projectsHTML = filteredRepos.map(repo => createProjectHTML(repo)).join('');
+            containerEl.innerHTML = projectsHTML;
+            
+            loadingEl.classList.add('hidden');
+            errorEl.classList.add('hidden');
+            containerEl.classList.remove('hidden');
+            
+            const cards = containerEl.querySelectorAll('.project-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        }
+
+        function showRateLimitMessage(loadingEl, errorEl, containerEl) {
+            loadingEl.classList.add('hidden');
+            containerEl.classList.add('hidden');
+            
+            errorEl.innerHTML = `
+                <div class="code-block rounded-lg p-8 mx-auto max-w-md">
+                    <div class="text-secondary mb-4">⏱️</div>
+                    <p class="text-gray-400 font-mono text-sm mb-2">Rate limit de GitHub API</p>
+                    <p class="text-gray-500 font-mono text-xs mb-4">Espera unos segundos antes de refrescar</p>
+                    <button onclick="loadGitHubRepos()" class="mt-4 px-4 py-2 bg-secondary text-white rounded font-mono text-sm hover:bg-secondary/80 transition-colors">
+                        Reintentar
+                    </button>
+                </div>
+            `;
+            errorEl.classList.remove('hidden');
+        }
+
+        function showErrorMessage(loadingEl, errorEl, containerEl) {
+            loadingEl.classList.add('hidden');
+            containerEl.classList.add('hidden');
+            
+            errorEl.innerHTML = `
+                <div class="code-block rounded-lg p-8 mx-auto max-w-md">
+                    <div class="text-accent mb-4">⚠️</div>
+                    <p class="text-gray-400 font-mono text-sm">Error al cargar repositorios</p>
+                    <button onclick="loadGitHubRepos()" class="mt-4 px-4 py-2 bg-primary text-black rounded font-mono text-sm hover:bg-primary/80 transition-colors">
+                        Reintentar
+                    </button>
+                </div>
+            `;
+            errorEl.classList.remove('hidden');
+        }
+
+        // Contact form functionality
+        const CONTACT_RATE_LIMIT_KEY = 'contact_form_last_submit';
+        const MIN_CONTACT_INTERVAL = 2 * 60 * 1000;
+        const MIN_MESSAGE_LENGTH = 10;
+        const MAX_MESSAGE_LENGTH = 1000;
+        
+        const SPAM_KEYWORDS = [
+            'bitcoin', 'crypto', 'investment', 'loan', 'money', 'casino', 
+            'viagra', 'pharmacy', 'pills', 'weight loss', 'make money',
+            'click here', 'urgent', 'congratulations', 'winner', 'prize'
+        ];
+
+        function canSubmitContact() {
+            const lastSubmit = localStorage.getItem(CONTACT_RATE_LIMIT_KEY);
+            if (!lastSubmit) return true;
+            
+            return (Date.now() - parseInt(lastSubmit)) > MIN_CONTACT_INTERVAL;
+        }
+
+        function markContactSubmitted() {
+            localStorage.setItem(CONTACT_RATE_LIMIT_KEY, Date.now().toString());
+        }
+
+        function isSpamContent(text) {
+            const lowerText = text.toLowerCase();
+            return SPAM_KEYWORDS.some(keyword => lowerText.includes(keyword));
+        }
+
+        function validateContactForm(name, email, subject, message, honeypot) {
+            if (honeypot && honeypot.trim() !== '') {
+                return { valid: false, error: 'Spam detectado' };
+            }
+
+            if (!canSubmitContact()) {
+                const timeLeft = Math.ceil((MIN_CONTACT_INTERVAL - (Date.now() - parseInt(localStorage.getItem(CONTACT_RATE_LIMIT_KEY)))) / 60000);
+                return { valid: false, error: `Espera ${timeLeft} minuto(s) antes de enviar otro mensaje` };
+            }
+
+            if (message.length < MIN_MESSAGE_LENGTH) {
+                return { valid: false, error: `El mensaje debe tener al menos ${MIN_MESSAGE_LENGTH} caracteres` };
+            }
+
+            if (message.length > MAX_MESSAGE_LENGTH) {
+                return { valid: false, error: `El mensaje no puede exceder ${MAX_MESSAGE_LENGTH} caracteres` };
+            }
+
+            if (isSpamContent(message) || isSpamContent(subject)) {
+                return { valid: false, error: 'Contenido sospechoso detectado' };
+            }
+
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                return { valid: false, error: 'Email inválido' };
+            }
+
+            if (name.length > 3 && /^(.)\1+$/.test(name.replace(/\s/g, ''))) {
+                return { valid: false, error: 'Nombre inválido' };
+            }
+
+            return { valid: true };
+        }
+
+        function sendEmail(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('contact-name').value.trim();
+            const email = document.getElementById('contact-email').value.trim();
+            const subject = document.getElementById('contact-subject').value.trim();
+            const message = document.getElementById('contact-message').value.trim();
+            const honeypot = document.getElementById('contact-honeypot').value;
+            
+            const validation = validateContactForm(name, email, subject, message, honeypot);
+            
+            if (!validation.valid) {
+                showNotification(`❌ ${validation.error}`, 'error');
+                return;
+            }
+
+            const submitButton = event.target.querySelector('button[type="submit"]');
+            const originalText = submitButton.textContent;
+            submitButton.disabled = true;
+            submitButton.textContent = 'Enviando...';
+
+            setTimeout(() => {
+                const mailtoSubject = `${subject} - Contacto desde Portfolio`;
+                const mailtoBody = `Nombre: ${name}\nEmail: ${email}\n\nMensaje:\n${message}\n\n---\nEnviado desde: zaphold2k.dev\nFecha: ${new Date().toLocaleString()}`;
+                
+                const mailtoLink = `mailto:casanovas.m@gmail.com?subject=${encodeURIComponent(mailtoSubject)}&body=${encodeURIComponent(mailtoBody)}`;
+                
+                window.location.href = mailtoLink;
+                markContactSubmitted();
+                showNotification('📧 Abriendo cliente de email...', 'success');
+                
+                setTimeout(() => {
+                    document.getElementById('contact-name').value = '';
+                    document.getElementById('contact-email').value = '';
+                    document.getElementById('contact-subject').value = '';
+                    document.getElementById('contact-message').value = '';
+                    
+                    submitButton.disabled = false;
+                    submitButton.textContent = originalText;
+                }, 1000);
+                
+            }, 2000);
+        }
+
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `fixed top-20 right-6 z-50 px-6 py-4 rounded-lg font-mono text-sm transform translate-x-full transition-transform duration-300 ${
+                type === 'success' ? 'bg-primary text-black' : 
+                type === 'error' ? 'bg-accent text-white' : 
+                'bg-secondary text-white'
+            }`;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.transform = 'translateX(0)';
+            }, 100);
+            
+            setTimeout(() => {
+                notification.style.transform = 'translateX(full)';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 3000);
+        }
+
+        // Development tools
+        window.githubCache = {
+            clear: () => {
+                localStorage.removeItem(CACHE_KEY);
+                localStorage.removeItem(RATE_LIMIT_KEY);
+                console.log('🗑️ Caché de GitHub limpiado');
+                return 'Caché limpiado. Refesca la página para recargar.';
+            },
+            info: () => {
+                const cached = localStorage.getItem(CACHE_KEY);
+                const lastRequest = localStorage.getItem(RATE_LIMIT_KEY);
+                
+                if (!cached) return 'No hay datos en caché';
+                
+                try {
+                    const { timestamp, data } = JSON.parse(cached);
+                    const age = Date.now() - timestamp;
+                    const ageMinutes = Math.floor(age / (1000 * 60));
+                    const isValid = age < CACHE_DURATION;
+                    const nextRequest = lastRequest ? 
+                        Math.max(0, MIN_REQUEST_INTERVAL - (Date.now() - parseInt(lastRequest))) : 0;
+                    
+                    return {
+                        'Repos en caché': data?.length || 0,
+                        'Edad del caché': `${ageMinutes} minutos`,
+                        'Caché válido': isValid,
+                        'Próximo request disponible en': nextRequest > 0 ? `${Math.ceil(nextRequest/1000)}s` : 'Ya disponible'
+                    };
+                } catch (e) {
+                    return 'Error al leer información del caché';
+                }
+            },
+            reload: loadGitHubRepos
+        };
+
+        window.contactDebug = {
+            clearRateLimit: () => {
+                localStorage.removeItem(CONTACT_RATE_LIMIT_KEY);
+                console.log('🗑️ Rate limit de contacto limpiado');
+                return 'Rate limit limpiado. Ahora puedes enviar mensajes.';
+            },
+            checkRateLimit: () => {
+                const lastSubmit = localStorage.getItem(CONTACT_RATE_LIMIT_KEY);
+                if (!lastSubmit) return 'No hay rate limit activo';
+                
+                const timeLeft = Math.max(0, MIN_CONTACT_INTERVAL - (Date.now() - parseInt(lastSubmit)));
+                return timeLeft > 0 ? 
+                    `Rate limit activo. ${Math.ceil(timeLeft/60000)} minuto(s) restantes.` : 
+                    'Rate limit expirado, puedes enviar un mensaje.';
+            },
+            testSpamFilter: (text) => {
+                return isSpamContent(text) ? 'SPAM detectado' : 'Contenido limpio';
+            }
+        };
+    </script>
+</body>
+</html>

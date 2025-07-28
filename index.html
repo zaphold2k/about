@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Martin Casanovas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="../js/profile.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#00ff88',
+                        secondary: '#0a84ff',
+                        accent: '#ff6b6b',
+                        'code-bg': '#0d1117',
+                        'code-border': '#21262d',
+                    },
+                    fontFamily: {
+                        'mono': ['JetBrains Mono', 'monospace'],
+                        'sans': ['Inter', 'sans-serif'],
+                    },
+                    animation: {
+                        'cursor': 'cursor 1s infinite',
+                        'fade-in': 'fadeIn 0.5s ease-in',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @keyframes cursor {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .code-block {
+            background: #0d1117;
+            border: 1px solid #21262d;
+        }
+        .syntax-comment { color: #8b949e; }
+        .syntax-string { color: #a5d6ff; }
+        .syntax-keyword { color: #ff7b72; }
+        .syntax-function { color: #d2a8ff; }
+        .syntax-variable { color: #79c0ff; }
+        .syntax-number { color: #79c0ff; }
+    </style>
+</head>
+<!-- <body class="bg-black text-gray-100 font-mono min-h-screen flex items-center justify-center px-6"></body> -->
+<body class="bg-black text-gray-100 font-mono min-h-screen flex px-6"></body>
+    <div class="w-full min-h-screen animate-fade-in">
+        <div class="font-mono text-sm leading-loose space-y-3" id="profile-content">
+            <div class="text-center py-8">
+                <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
+                <p class="text-gray-400 font-mono text-sm">Cargando información...</p>
+            </div>
+        </div>
+        
+        <!-- Footer minimalista -->
+        <div class="mt-8" id="footer-content">
+            <div class="text-xs text-gray-500 font-mono">
+                <span class="text-primary">~/</span>zaphold.ar
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Inicializar página cuando los datos estén cargados
+        document.addEventListener('profileLoaded', function(event) {
+            const profileData = event.detail;
+            
+            // Generar contenido dinámico
+            const profileContent = document.getElementById('profile-content');
+            profileContent.innerHTML = window.htmlGenerator.generateIndexContact();
+            
+            // Actualizar footer con datos dinámicos
+            const footerContent = document.getElementById('footer-content');
+            const personal = window.profileManager.getPersonal();
+            footerContent.innerHTML = `
+                <div class="text-xs text-gray-500 font-mono">
+                    <span class="text-primary">~/</span>${personal.website}
+                </div>
+            `;
+            
+            // Inicializar animaciones después de cargar contenido
+            initializeAnimations();
+        });
+
+        // Manejo de errores de carga
+        document.addEventListener('profileError', function(event) {
+            const profileContent = document.getElementById('profile-content');
+            profileContent.innerHTML = `
+                <div class="text-center py-8">
+                    <div class="text-accent mb-4">⚠️</div>
+                    <p class="text-gray-400 font-mono text-sm">Error al cargar información del perfil</p>
+                    <button onclick="window.location.reload()" class="mt-4 px-4 py-2 bg-primary text-black rounded font-mono text-sm hover:bg-primary/80 transition-colors">
+                        Reintentar
+                    </button>
+                </div>
+            `;
+        });
+
+        // Función para inicializar animaciones
+        function initializeAnimations() {
+            // Efecto typing para el cursor
+            let cursorVisible = true;
+            setInterval(() => {
+                const cursor = document.querySelector('.animate-cursor');
+                if (cursor) {
+                    cursor.style.opacity = cursorVisible ? '0' : '1';
+                    cursorVisible = !cursorVisible;
+                }
+            }, 500);
+        }
+    </script>
+</body>
+</html>
